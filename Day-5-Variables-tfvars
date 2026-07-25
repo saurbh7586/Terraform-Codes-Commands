@@ -1,0 +1,41 @@
+#To make script use variables you need to mention only variables file is key and valu using below format#
+
+Variable.tf
+variable "ami_id" {
+  description = "this is ami id"
+  type        = string
+  
+}
+
+variable "inst_type" {
+  description = "this is instane"
+  type        = string
+
+}
+
+   variable "key" {
+  type        = string
+
+}
+
+
+#After Creating Variables Files Write the key same as varibles in Main.tf files use below format#
+
+Main.tf
+resource "aws_instance" "vm" {
+        ami =  var.ami_id
+        instance_type = var.inst_type
+        key_name =  var.key
+
+        tags = {
+         Name = "server"     
+    }
+}
+
+
+#After Craetion Variables File Create Terraform.tfvars for shortly mention your values like ami id, instance type.etc Usibng below format#
+
+Terraform.tfvars
+ami_id =  "ami-0fe1c77f5f951a0ad"
+inst_type = "t3.micro"
+key = "Europe-ec2-key"
